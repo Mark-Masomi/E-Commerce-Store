@@ -52,7 +52,7 @@ Each directory represents a separate Spring Boot project, encapsulating the func
 1. **Clone the Repository**:
 
    ```bash
-   git clone https://github.com/your-username/ecommerce-microservices-api.git
+   git clone https://github.com/Mark-Masomi/E-Commerce-Store.git
    ```
 
 2. **Navigate to the Project Directory**:
