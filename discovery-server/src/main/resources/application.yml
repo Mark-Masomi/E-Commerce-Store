@@ -1,0 +1,7 @@
+server:
+  port: 8761  # Standardport för Eureka Server
+
+eureka:
+  client:
+    register-with-eureka: false  # Eureka Server ska inte registrera sig själv
+    fetch-registry: false        # Eureka Server behöver inte hämta andra tjänster

@@ -1,0 +1,62 @@
+# Ignorera Gradle-specifika filer
+.gradle/
+build/
+out/
+
+# Ignorera IDE-specifika filer
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# Ignorera loggfiler och temporära filer
+*.log
+*.tmp
+
+# Ignorera beroenden (om du använder Gradle/Wrapper)
+gradle-wrapper.jar
+gradle-wrapper.properties
+
+# Ignorera lokala konfigurationsfiler
+application-local.yml
+application-dev.yml
+
+HELP.md
+
+# Undantag för Gradle
+.gradle
+build/
+!gradle/wrapper/gradle-wrapper.jar
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+bin/
+!**/src/main/**/bin/
+!**/src/test/**/bin/
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+out/
+!**/src/main/**/out/
+!**/src/test/**/out/
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+### VS Code ###
+.vscode/
