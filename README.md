@@ -1,130 +1,138 @@
-# E-Commerce Store
+# E-Commerce Microservices API
 
-A Spring Boot microservice-based application for managing orders, products, inventory, and product reviews.
+This project implements an e-commerce API using a microservices architecture, leveraging Gradle, Kotlin, and Java.
 
-## **Microservices Overview**
+**Table of Contents**
 
-- **API Gateway**: Routes requests to appropriate microservices.
-- **Eureka Service**: Service discovery and registration.
-- **User Service**: Handles user management.
-- **Auth Service**: Provides authentication using JWT.
-- **Inventory Service**: Manages product inventory and availability.
-- **Order Service**: Processes customer orders.
-- **Reviews Service**: Manages product reviews and ratings.
-- **Notification Service**: Sends notifications to users.
+- [Introduction](#introduction)
+- [Project Structure](#project-structure)
+- [Technologies Used](#technologies-used)
+- [Setup and Installation](#setup-and-installation)
+- [Running the Application](#running-the-application)
+- [Testing the API](#testing-the-api)
+- [Contributing](#contributing)
+- [License](#license)
 
----
+## Introduction
 
-## **Technologies and Concepts Used**
+This repository contains the source code for an e-commerce platform designed with a microservices architecture. The system is built using Gradle for build automation, Kotlin for the development language, and Java for compatibility and interoperability. The application is structured into multiple microservices, each responsible for a specific domain within the e-commerce ecosystem.
 
-- **Programming Language**: Java 17  
-- **Framework**: Spring Boot  
-- **Build Tool**: Gradle  
-- **Database**: PostgreSQL  
+## Project Structure
 
----
+The project is organized into the following modules:
 
-## **Architecture**
+```
+ecommerce/
+├── discovery-server/          # Eureka Server for service discovery
+├── config-server/             # Spring Cloud Config Server
+├── api-gateway/               # API Gateway (Spring Cloud Gateway)
+├── product-service/           # Microservice for product management
+├── order-service/             # Microservice for order management
+├── user-service/              # Microservice for user management
+└── inventory-service/         # Microservice for inventory management
+```
 
-- **Microservices**: Modular, loosely coupled services for scalability and maintainability.  
-- **API Gateway Pattern**: Centralized gateway for routing and aggregating requests.  
-- **Service Discovery**: Netflix Eureka for dynamic service registration and discovery.
+Each directory represents a separate Spring Boot project, encapsulating the functionality of a specific microservice.
 
----
+## Technologies Used
 
-## **Security**
+- **Gradle**: Build automation tool used for dependency management and project builds.
+- **Kotlin**: Programming language used for developing the microservices.
+- **Java**: Provides compatibility and interoperability within the project.
+- **Spring Boot**: Framework for building stand-alone, production-grade Spring-based applications.
+- **Spring Cloud**: Provides tools for building distributed systems and microservices architectures.
+- **Eureka Server**: Service discovery server for locating services in the system.
+- **Spring Cloud Config**: Centralized configuration server for managing application configurations.
+- **Spring Cloud Gateway**: API Gateway for routing requests to appropriate microservices.
+- **Spring Data JPA**: Simplifies database interactions using Java Persistence API.
+- **H2 Database**: In-memory database used for development and testing purposes.
 
-- **Authentication**: JSON Web Tokens (JWT) for secure user authentication and authorization.
+## Setup and Installation
 
----
+1. **Clone the Repository**:
 
-## **Testing and Quality Assurance**
-
-- **Unit Testing**: JUnit and Mockito.  
-- **Integration Testing**: Ensures services interact correctly.  
-- **TestContainers**: Manages external dependencies (e.g., databases) during testing.
-
----
-
-## **CI/CD Pipeline**
-
-- **Build and Dependency Management**: Maven.  
-- **Containerization**: Docker for packaging microservices.  
-- **Automation**: GitHub Actions for building, testing, and publishing Docker images to Docker Hub.
-
----
-
-## **Event-Driven Messaging**
-
-- **Message Broker**: Apache Kafka for asynchronous communication between services.
-
----
-
-## **Observability and Monitoring**
-
-- **Data Visualization**: Grafana.  
-- **Tracing**: OpenTelemetry, Grafana Tempo, and Zipkin.  
-- **Metrics Collection**: Prometheus.  
-- **Logging**: Grafana Loki.
-
----
-
-## **How to Run the Application**
-
-### **Using Docker Compose**
-
-Run the pre-built Docker images for a fast setup:  
-1. Clone the repository or download the `docker-compose.yaml` file.  
-2. Run the following command to start all services:  
    ```bash
-   cd deployment && docker-compose up -d
+   git clone https://github.com/your-username/ecommerce-microservices-api.git
    ```
 
-### **Local Development with Docker**
+2. **Navigate to the Project Directory**:
 
-To build images from the local codebase:  
-1. Clone the repository.  
-2. Run the following command:  
    ```bash
-   docker-compose -f docker-compose-dev.yaml up -d --build
+   cd ecommerce-microservices-api
    ```
 
-For optimal local development:  
-- Install **Java 17** or higher and **Maven**.  
-- Use `docker-compose-infra.yaml` to configure essential infrastructure services.  
-- Run individual services with:  
+3. **Build the Project**:
+
    ```bash
-   mvn spring-boot:run
+   ./gradlew build
    ```
 
----
+   This command compiles the source code and packages the application.
 
-## **API Exploration and Interaction**
+## Running the Application
 
-- **Swagger UI**: [http://localhost:8080/swagger](http://localhost:8080/swagger)  
-- **Postman Collection**: Import `postman.json` into Postman.
+1. **Start the Eureka Server**:
 
----
+   ```bash
+   cd discovery-server
+   ./gradlew bootRun
+   ```
 
-## **Future Improvements**
+   The Eureka Server will start on port 8761.
 
-1. **Security**: Migrate from JWT to OAuth 2.0 using Keycloak for enhanced authentication and authorization.  
-2. **CI/CD**: Integrate Jenkins for automated testing and deployment pipelines.  
-3. **Container Orchestration**: Adopt Kubernetes for container orchestration to improve scalability and fault tolerance.  
-4. **Performance Optimization**: Implement caching mechanisms and optimize database queries.  
-5. **Feature Enhancements**: Add support for additional payment gateways and advanced analytics.
+2. **Start the Config Server**:
 
----
+   ```bash
+   cd config-server
+   ./gradlew bootRun
+   ```
 
-## **Contributing**
+   The Config Server will start on port 8888.
 
-We welcome contributions! Please follow the steps below:  
-1. Fork the repository.  
-2. Create a new branch for your feature/bug fix.  
-3. Submit a pull request with detailed descriptions of your changes.
+3. **Start the API Gateway**:
 
----
+   ```bash
+   cd api-gateway
+   ./gradlew bootRun
+   ```
 
-## **License**
+   The API Gateway will start on port 8080.
 
-This project is licensed under the [MIT License](LICENSE).
+4. **Start the Microservices**:
+
+   For each microservice (e.g., `product-service`, `order-service`), navigate to its directory and run:
+
+   ```bash
+   cd product-service
+   ./gradlew bootRun
+   ```
+
+   Repeat this step for each microservice.
+
+## Testing the API
+
+Once all services are running, you can test the API endpoints using tools like Postman or cURL. The API Gateway routes requests to the appropriate microservices.
+
+For example, to retrieve a list of products:
+
+```bash
+curl http://localhost:8080/api/products
+```
+
+Ensure that the Eureka Server and Config Server are running before starting the microservices.
+
+## Contributing
+
+Contributions are welcome! Please fork the repository, make your changes, and submit a pull request.
+
+Before contributing, ensure that your code adheres to the project's coding standards and passes all tests.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+For more detailed information and advanced configurations, refer to the [Spring Boot Microservices E-Commerce Project: Step-by-Step Tutorial](https://rameshfadatare.medium.com/in-this-tutorial-we-will-create-a-simple-e-commerce-application-using-a-microservices-architecture-a51214921faa).
+
+For additional resources and examples on microservices architecture with Kotlin, you can explore repositories like [microservices-example](https://github.com/rkudryashov/microservices-example) and [spring-microservices](https://github.com/ElinaValieva/spring-microservices).
+
+For a comprehensive guide on setting up a Spring Boot, Kotlin, and Gradle project, refer to [Spring Boot + Kotlin + Gradle Project Template](https://medium 
