@@ -7,13 +7,14 @@ import jakarta.persistence.Id;
 
 @Entity
 public class Inventory {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private Long productId;
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    Long id;
+    Long productId;
     private int quantity;
 
-    // Getters och setters
+
     public Long getId() {
         return id;
     }
@@ -37,4 +38,9 @@ public class Inventory {
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
+
+
+
+
+
 }
